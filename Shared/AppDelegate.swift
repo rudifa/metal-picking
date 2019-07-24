@@ -1,30 +1,27 @@
+import MetalKit
 
 #if os(iOS)
 
-import UIKit
+    #if targetEnvironment(simulator)
+        #warning("Cannot build a Metal target for simulator")
+    #endif
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+    @UIApplicationMain
+    class AppDelegate: UIResponder, UIApplicationDelegate {
+        var window: UIWindow?
 
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        return true
+        func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            return true
+        }
     }
-}
 
-#endif
+#elseif os(OSX)
 
-#if os(OSX)
-
-import Cocoa
-
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return true
+    @NSApplicationMain
+    class AppDelegate: NSObject, NSApplicationDelegate {
+        func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool {
+            return true
+        }
     }
-}
 
 #endif

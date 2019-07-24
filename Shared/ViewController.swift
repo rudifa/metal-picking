@@ -1,17 +1,11 @@
 
-#if os(OSX)
-import Cocoa
-typealias NSUIViewController = NSViewController
-#elseif os(iOS)
-import UIKit
-typealias NSUIViewController = UIViewController
-#endif
-
 import MetalKit
 
-let GridSideCount = 5
+#if targetEnvironment(simulator)
+#warning("Cannot build a Metal target for simulator")
+#endif
 
-class ViewController: NSUIViewController, MTKViewDelegate {
+class ViewController: NSUIViewController {
     var mtkView: MTKView {
         return view as! MTKView
     }
@@ -24,19 +18,23 @@ class ViewController: NSUIViewController, MTKViewDelegate {
     var pointOfView: Node?
     var cameraAngle: Float = 0
 
+    var lastPanLocation = CGPoint()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         device = MTLCreateSystemDefaultDevice()
         commandQueue = device.makeCommandQueue()
-        
+
         mtkView.device = device
         mtkView.sampleCount = 4
         mtkView.colorPixelFormat = .bgra8Unorm_srgb
         mtkView.depthStencilPixelFormat = .depth32Float
         mtkView.delegate = self
 
-        makeScene()
+        addGestureRecognizers()
+
+        makeScene_xyz_spheres()
 
         do {
             renderer = try Renderer(view: mtkView, vertexDescriptor: vertexDescriptor)
@@ -44,7 +42,7 @@ class ViewController: NSUIViewController, MTKViewDelegate {
             print("\(error)")
         }
     }
-    
+
     lazy var vertexDescriptor: MDLVertexDescriptor = {
         let vertexDescriptor = MDLVertexDescriptor()
         vertexDescriptor.vertexAttributes[0].name = MDLVertexAttributePosition
@@ -58,62 +56,92 @@ class ViewController: NSUIViewController, MTKViewDelegate {
         vertexDescriptor.bufferLayouts[0].stride = MemoryLayout<Float>.size * 6
         return vertexDescriptor
     }()
-    
-    func makeScene() {
+
+    func makeScene_xyz_spheres(gridSideCountX: Int = 2, gridSideCountY: Int = 4, gridSideCountZ: Int = 3) {
         let sphereRadius: Float = 1
-        let spherePadding: Float = 1
+        let sphereDistance: Float = 2 * sphereRadius + 1
+        let spherePadding = sphereDistance - 2 * sphereRadius
         let meshAllocator = MTKMeshBufferAllocator(device: device)
-        let mdlMesh = MDLMesh.init(sphereWithExtent: float3(sphereRadius, sphereRadius, sphereRadius),
-                                   segments: uint2(20, 20),
-                                   inwardNormals: false,
-                                   geometryType: .triangles,
-                                   allocator: meshAllocator)
+        let mdlMesh = MDLMesh(sphereWithExtent: float3(sphereRadius, sphereRadius, sphereRadius),
+                              segments: uint2(20, 20),
+                              inwardNormals: false,
+                              geometryType: .triangles,
+                              allocator: meshAllocator)
         mdlMesh.vertexDescriptor = vertexDescriptor
-        
+
         guard let sphereMesh = try? MTKMesh(mesh: mdlMesh, device: device) else {
             print("Could not create MetalKit mesh from ModelIO mesh"); return
         }
-        
-        let gridSideLength = (sphereRadius * 2 * Float(GridSideCount)) + (spherePadding * Float(GridSideCount - 1))
-        for j in 0..<GridSideCount {
-            for i in 0..<GridSideCount {
-                let node = Node()
-                node.mesh = sphereMesh
-                node.material.color = float4(hue: Float(drand48()), saturation: 1.0, brightness: 1.0)
-                let position = float3(
-                    sphereRadius + Float(i) * (2 * sphereRadius + spherePadding) - (Float(gridSideLength) / 2),
-                    sphereRadius + Float(j) * (2 * sphereRadius + spherePadding) - (Float(gridSideLength) / 2),
-                    0)
-                node.transform = float4x4(translationBy: position)
-                node.boundingSphere.radius = sphereRadius
-                node.name = "(\(i), \(j))"
-                scene.rootNode.addChildNode(node)
+
+        func positionOnAxis(ijk: Int, gridSideCount: Int) -> Float {
+            return (Float(ijk) - Float(gridSideCount - 1) / 2) * sphereDistance
+        }
+
+        for i in 0 ..< gridSideCountX {
+            for j in 0 ..< gridSideCountY {
+                for k in 0 ..< gridSideCountZ {
+                    let node = Node()
+                    node.mesh = sphereMesh
+                    node.material.color = float4(hue: Float(drand48()), saturation: 1.0, brightness: 1.0)
+                    let position3 = float3(
+                        positionOnAxis(ijk: i, gridSideCount: gridSideCountX),
+                        positionOnAxis(ijk: j, gridSideCount: gridSideCountY),
+                        positionOnAxis(ijk: k, gridSideCount: gridSideCountZ)
+                    )
+                    node.transform = float4x4(translationBy: position3)
+                    node.boundingSphere.radius = sphereRadius
+                    node.name = "(\(i), \(j)), \(k))"
+                    scene.rootNode.addChildNode(node)
+                }
             }
         }
-        
+
         let cameraNode = Node()
         cameraNode.transform = float4x4(translationBy: float3(0, 0, 15))
         cameraNode.camera = Camera()
         pointOfView = cameraNode
         scene.rootNode.addChildNode(cameraNode)
     }
+}
 
-    func handleInteraction(at point: CGPoint) {
+// MARK: - gesture recognizers
+
+extension ViewController: NSUIGestureRecognizerDelegate {
+    fileprivate func addGestureRecognizers() {
+        let tapClickRecognizer = NSUITapClickGestureRecognizer(target: self, action: #selector(handleTapClick(recognizer:)))
+        let panRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+
+        tapClickRecognizer.delegate = self
+        panRecognizer.delegate = self
+
+        view.addGestureRecognizer(tapClickRecognizer)
+        view.addGestureRecognizer(panRecognizer)
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: NSUIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: NSUIGestureRecognizer) -> Bool {
+        printClassAndFunc()
+        return true
+    }
+
+    @objc func handleTapClick(recognizer: NSUITapClickGestureRecognizer) {
+        let location = recognizer.locationFromTop(in: view)
+        printClassAndFunc(info: "\(location)")
+
         guard let cameraNode = pointOfView, let camera = cameraNode.camera else { return }
-        
+
         let viewport = mtkView.bounds // Assume viewport matches window; if not, apply additional inverse viewport xform
         let width = Float(viewport.size.width)
         let height = Float(viewport.size.height)
         let aspectRatio = width / height
-        
+
         let projectionMatrix = camera.projectionMatrix(aspectRatio: aspectRatio)
         let inverseProjectionMatrix = projectionMatrix.inverse
 
         let viewMatrix = cameraNode.worldTransform.inverse
         let inverseViewMatrix = viewMatrix.inverse
 
-        let clipX = (2 * Float(point.x)) / width - 1
-        let clipY = 1 - (2 * Float(point.y)) / height
+        let clipX = (2 * Float(location.x)) / width - 1
+        let clipY = 1 - (2 * Float(location.y)) / height
         let clipCoords = float4(clipX, clipY, 0, 1) // Assume clip space is hemicube, -Z is into the screen
 
         var eyeRayDir = inverseProjectionMatrix * clipCoords
@@ -132,55 +160,58 @@ class ViewController: NSUIViewController, MTKViewDelegate {
             print("Hit \(hit.node) at \(hit.intersectionPoint)")
         }
     }
-    
 
+    @objc func handlePan(recognizer: NSUIPanGestureRecognizer) {
+        let location = recognizer.locationFromTop(in: view)
+        printClassAndFunc(info: "\(location)  \(recognizer.state.rawValue)")
+        let panSensitivity: Float = 5.0
+        switch recognizer.state {
+        case .began:
+            lastPanLocation = location
+        case .changed:
+            _ = Float((lastPanLocation.x - location.x) / view.bounds.width) * panSensitivity
+            _ = Float((lastPanLocation.y - location.y) / view.bounds.height) * panSensitivity
+            // printClassAndFunc(info: "\(xDelta) \(yDelta) ")
+            lastPanLocation = location
+        case .ended:
+            break
+        default:
+            break
+        }
+
+        // TODO: use pan to rotate sphere cluster
+    }
+}
+
+// MARK: - MTKViewDelegate
+
+extension ViewController: MTKViewDelegate {
     func draw(in view: MTKView) {
         frameSemaphore.wait()
-        
+
         cameraAngle += 0.01
-        
+
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         guard let renderCommandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
-        
+
         pointOfView?.transform = float4x4(rotationAroundAxis: float3(x: 0, y: 1, z: 0), by: cameraAngle) *
-                                 float4x4(translationBy: float3(0, 0, 15))
+            float4x4(translationBy: float3(0, 0, 15))
 
         renderer.draw(scene, from: pointOfView, in: renderCommandEncoder)
-        
+
         renderCommandEncoder.endEncoding()
-        
+
         if let drawable = view.currentDrawable {
             commandBuffer.present(drawable)
         }
-        
+
         commandBuffer.addCompletedHandler { _ in
             self.frameSemaphore.signal()
         }
-        
+
         commandBuffer.commit()
     }
-    
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-    }
-}
 
-#if os(OSX)
-extension ViewController {
-    override func mouseDown(with event: NSEvent) {
-        var location = view.convert(event.locationInWindow, from: nil)
-        location.y = view.bounds.height - location.y // Flip from AppKit default window coordinates to Metal viewport coordinates
-        handleInteraction(at: location)
-    }
+    func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {}
 }
-#endif
-
-#if os(iOS)
-extension ViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let location = touches.first?.location(in: view) {
-            handleInteraction(at: location)
-        }
-    }
-}
-#endif
