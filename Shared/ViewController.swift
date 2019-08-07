@@ -5,7 +5,7 @@ import MetalKit
 #warning("Cannot build a Metal target for simulator")
 #endif
 
-class ViewController: NSUIViewController {
+class ViewController: NUViewController {
     var mtkView: MTKView {
         return view as! MTKView
     }
@@ -106,10 +106,10 @@ class ViewController: NSUIViewController {
 
 // MARK: - gesture recognizers
 
-extension ViewController: NSUIGestureRecognizerDelegate {
+extension ViewController: NUGestureRecognizerDelegate {
     fileprivate func addGestureRecognizers() {
-        let tapClickRecognizer = NSUITapClickGestureRecognizer(target: self, action: #selector(handleTapClick(recognizer:)))
-        let panRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        let tapClickRecognizer = NUTapClickGestureRecognizer(target: self, action: #selector(handleTapClick(recognizer:)))
+        let panRecognizer = NUPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
 
         tapClickRecognizer.delegate = self
         panRecognizer.delegate = self
@@ -118,12 +118,12 @@ extension ViewController: NSUIGestureRecognizerDelegate {
         view.addGestureRecognizer(panRecognizer)
     }
 
-    func gestureRecognizer(_ gestureRecognizer: NSUIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: NSUIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: NUGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: NUGestureRecognizer) -> Bool {
         printClassAndFunc()
         return true
     }
 
-    @objc func handleTapClick(recognizer: NSUITapClickGestureRecognizer) {
+    @objc func handleTapClick(recognizer: NUTapClickGestureRecognizer) {
         let location = recognizer.locationFromTop(in: view)
         printClassAndFunc(info: "\(location)")
 
@@ -161,7 +161,7 @@ extension ViewController: NSUIGestureRecognizerDelegate {
         }
     }
 
-    @objc func handlePan(recognizer: NSUIPanGestureRecognizer) {
+    @objc func handlePan(recognizer: NUPanGestureRecognizer) {
         let location = recognizer.locationFromTop(in: view)
         printClassAndFunc(info: "\(location)  \(recognizer.state.rawValue)")
         let panSensitivity: Float = 5.0
