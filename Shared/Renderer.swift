@@ -53,6 +53,13 @@ class Renderer {
         return device.makeDepthStencilState(descriptor: depthStateDescriptor)!
     }
 
+    /// Make the RenderPipelineState based on DefaultLibrary, shader programs, RenderPipelineDescriptor and MetalVertexDescriptorFromModelIO
+    ///
+    /// - Parameters:
+    ///   - view: the MTKView
+    ///   - vertexDescriptor:
+    /// - Returns: MTLRenderPipelineState
+    /// - Throws: on failure to get the device or to create the DefaultLibrary
     class func makeRenderPipelineState(view: MTKView, vertexDescriptor: MDLVertexDescriptor) throws -> MTLRenderPipelineState {
         guard let device = view.device else { throw RendererInitError(description: "View device cannot be nil") }
 
