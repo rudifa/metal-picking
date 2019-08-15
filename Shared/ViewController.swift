@@ -2,7 +2,7 @@
 import MetalKit
 
 #if targetEnvironment(simulator)
-#warning("Cannot build a Metal target for simulator")
+    #warning("Cannot build a Metal target for simulator")
 #endif
 
 class ViewController: NUViewController {
@@ -10,58 +10,30 @@ class ViewController: NUViewController {
         return view as! MTKView
     }
 
-    var device: MTLDevice!
-    var commandQueue: MTLCommandQueue!
-    let frameSemaphore = DispatchSemaphore(value: MaxInFlightFrameCount)
     var renderer: Renderer!
     var scene = Scene()
     var pointOfView: Node?
-    var cameraAngle: Float = 0
 
     var lastPanLocation = CGPoint()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        device = MTLCreateSystemDefaultDevice()
-        commandQueue = device.makeCommandQueue()
 
-        mtkView.device = device
-        mtkView.sampleCount = 4
-        mtkView.colorPixelFormat = .bgra8Unorm_srgb
-        mtkView.depthStencilPixelFormat = .depth32Float
         mtkView.delegate = self
 
         addGestureRecognizers()
 
-        makeScene_xyz_spheres()
+        renderer = Renderer(view: mtkView)
 
-        do {
-            renderer = try Renderer(view: mtkView, vertexDescriptor: vertexDescriptor)
-        } catch {
-            print("\(error)")
-        }
+        makeScene_xyz_spheres(vertexDescriptor: renderer.vertexDescriptor)
     }
 
-    lazy var vertexDescriptor: MDLVertexDescriptor = {
-        let vertexDescriptor = MDLVertexDescriptor()
-        vertexDescriptor.vertexAttributes[0].name = MDLVertexAttributePosition
-        vertexDescriptor.vertexAttributes[0].format = .float3
-        vertexDescriptor.vertexAttributes[0].offset = 0
-        vertexDescriptor.vertexAttributes[0].bufferIndex = 0
-        vertexDescriptor.vertexAttributes[1].name = MDLVertexAttributeNormal
-        vertexDescriptor.vertexAttributes[1].format = .float3
-        vertexDescriptor.vertexAttributes[1].offset = MemoryLayout<Float>.size * 3
-        vertexDescriptor.vertexAttributes[1].bufferIndex = 0
-        vertexDescriptor.bufferLayouts[0].stride = MemoryLayout<Float>.size * 6
-        return vertexDescriptor
-    }()
-
-    func makeScene_xyz_spheres(gridSideCountX: Int = 2, gridSideCountY: Int = 4, gridSideCountZ: Int = 3) {
+    func makeScene_xyz_spheres(vertexDescriptor: MDLVertexDescriptor, gridSideCountX: Int = 2, gridSideCountY: Int = 4, gridSideCountZ: Int = 3) {
         let sphereRadius: Float = 1
         let sphereDistance: Float = 2 * sphereRadius + 1
         let spherePadding = sphereDistance - 2 * sphereRadius
-        let meshAllocator = MTKMeshBufferAllocator(device: device)
+        let meshAllocator = MTKMeshBufferAllocator(device: renderer.device)
         let mdlMesh = MDLMesh(sphereWithExtent: float3(sphereRadius, sphereRadius, sphereRadius),
                               segments: uint2(20, 20),
                               inwardNormals: false,
@@ -69,7 +41,7 @@ class ViewController: NUViewController {
                               allocator: meshAllocator)
         mdlMesh.vertexDescriptor = vertexDescriptor
 
-        guard let sphereMesh = try? MTKMesh(mesh: mdlMesh, device: device) else {
+        guard let sphereMesh = try? MTKMesh(mesh: mdlMesh, device: renderer.device) else {
             print("Could not create MetalKit mesh from ModelIO mesh"); return
         }
 
@@ -118,7 +90,7 @@ extension ViewController: NUGestureRecognizerDelegate {
         view.addGestureRecognizer(panRecognizer)
     }
 
-    func gestureRecognizer(_ gestureRecognizer: NUGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: NUGestureRecognizer) -> Bool {
+    func gestureRecognizer(_: NUGestureRecognizer, shouldRecognizeSimultaneouslyWith _: NUGestureRecognizer) -> Bool {
         printClassAndFunc()
         return true
     }
@@ -187,15 +159,18 @@ extension ViewController: NUGestureRecognizerDelegate {
 
 extension ViewController: MTKViewDelegate {
     func draw(in view: MTKView) {
-        frameSemaphore.wait()
+        renderer.frameSemaphore.wait()
 
-        cameraAngle += 0.01
+        // 2 pull into renderer.draw
 
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
+        renderer.cameraAngle += 0.01
+
+        guard let commandBuffer = renderer.commandQueue.makeCommandBuffer() else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         guard let renderCommandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 
-        pointOfView?.transform = float4x4(rotationAroundAxis: float3(x: 0, y: 1, z: 0), by: cameraAngle) *
+        // 1 pull into renderer.draw
+        pointOfView?.transform = float4x4(rotationAroundAxis: float3(x: 0, y: 1, z: 0), by: renderer.cameraAngle) *
             float4x4(translationBy: float3(0, 0, 15))
 
         renderer.draw(scene, from: pointOfView, in: renderCommandEncoder)
@@ -207,7 +182,7 @@ extension ViewController: MTKViewDelegate {
         }
 
         commandBuffer.addCompletedHandler { _ in
-            self.frameSemaphore.signal()
+            self.renderer.frameSemaphore.signal()
         }
 
         commandBuffer.commit()

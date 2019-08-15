@@ -1,0 +1,754 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/AppDelegate.swift",
+      "line": 21,
+      "symbol": "AppDelegate",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/AppDelegate.swift",
+      "line": 22,
+      "symbol": "AppDelegate.applicationShouldTerminateAfterLastWindowClosed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 6,
+      "symbol": "float4.init(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 11,
+      "symbol": "float4.init(hue:saturation:brightness:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 40,
+      "symbol": "float4.xyz",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 46,
+      "symbol": "float4x4.init(rotationAroundAxis:by:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 58,
+      "symbol": "float4x4.init(translationBy:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 65,
+      "symbol": "float4x4.init(perspectiveProjectionRHFovY:aspectRatio:nearZ:farZ:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/MathUtilities.swift",
+      "line": 76,
+      "symbol": "radians_from_degrees(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ModelIOExtensions.swift",
+      "line": 6,
+      "symbol": "MDLVertexDescriptor.vertexAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ModelIOExtensions.swift",
+      "line": 9,
+      "symbol": "MDLVertexDescriptor.bufferLayouts",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 6,
+      "symbol": "RendererInitError",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 7,
+      "symbol": "RendererInitError.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 10,
+      "symbol": "InstanceConstants",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 11,
+      "symbol": "InstanceConstants.modelViewProjectionMatrix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 12,
+      "symbol": "InstanceConstants.normalMatrix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 13,
+      "symbol": "InstanceConstants.color",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 16,
+      "symbol": "MaxInFlightFrameCount",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 18,
+      "symbol": "ConstantBufferLength",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 19,
+      "symbol": "ConstantAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 21,
+      "symbol": "Renderer",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 22,
+      "symbol": "Renderer.view",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 23,
+      "symbol": "Renderer.device",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 24,
+      "symbol": "Renderer.renderPipelineState",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 25,
+      "symbol": "Renderer.depthStencilState",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 27,
+      "symbol": "Renderer.constantBuffers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 28,
+      "symbol": "Renderer.frameIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 30,
+      "symbol": "Renderer.init(view:vertexDescriptor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 49,
+      "symbol": "Renderer.makeDepthStencilState(device:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 56,
+      "symbol": "Renderer.makeRenderPipelineState(view:vertexDescriptor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 77,
+      "symbol": "Renderer.draw(_:from:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Renderer.swift",
+      "line": 108,
+      "symbol": "Renderer.draw(_:worldTransform:viewMatrix:projectionMatrix:constantOffset:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/BoundingSphere.swift",
+      "line": 4,
+      "symbol": "BoundingSphere",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/BoundingSphere.swift",
+      "line": 5,
+      "symbol": "BoundingSphere.center",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/BoundingSphere.swift",
+      "line": 6,
+      "symbol": "BoundingSphere.radius",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/BoundingSphere.swift",
+      "line": 9,
+      "symbol": "BoundingSphere.intersect(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Camera.swift",
+      "line": 4,
+      "symbol": "Camera",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Camera.swift",
+      "line": 5,
+      "symbol": "Camera.fieldOfView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Camera.swift",
+      "line": 6,
+      "symbol": "Camera.nearZ",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Camera.swift",
+      "line": 7,
+      "symbol": "Camera.farZ",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Camera.swift",
+      "line": 9,
+      "symbol": "Camera.projectionMatrix(aspectRatio:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 4,
+      "symbol": "HitResult",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 5,
+      "symbol": "HitResult.node",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 6,
+      "symbol": "HitResult.ray",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 7,
+      "symbol": "HitResult.parameter",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 9,
+      "symbol": "HitResult.intersectionPoint",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/HitResult.swift",
+      "line": 13,
+      "symbol": "HitResult.<(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 5,
+      "symbol": "Material",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 6,
+      "symbol": "Material.color",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 7,
+      "symbol": "Material.highlighted",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 10,
+      "symbol": "Node",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 11,
+      "symbol": "Node.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 13,
+      "symbol": "Node.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 15,
+      "symbol": "Node.parent",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 16,
+      "symbol": "Node.children",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 18,
+      "symbol": "Node.camera",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 20,
+      "symbol": "Node.mesh",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 22,
+      "symbol": "Node.material",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 24,
+      "symbol": "Node.transform",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 26,
+      "symbol": "Node.worldTransform",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 34,
+      "symbol": "Node.boundingSphere",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 36,
+      "symbol": "Node.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 40,
+      "symbol": "Node.addChildNode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 51,
+      "symbol": "Node.removeFromParent()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Node.swift",
+      "line": 55,
+      "symbol": "Node.hitTest(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Ray.swift",
+      "line": 4,
+      "symbol": "Ray",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Ray.swift",
+      "line": 5,
+      "symbol": "Ray.origin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Ray.swift",
+      "line": 6,
+      "symbol": "Ray.direction",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Ray.swift",
+      "line": 8,
+      "symbol": "Ray.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Scene.swift",
+      "line": 5,
+      "symbol": "Scene",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Scene.swift",
+      "line": 6,
+      "symbol": "Scene.rootNode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/Scene/Scene.swift",
+      "line": 8,
+      "symbol": "Scene.hitTest(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 8,
+      "symbol": "ViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 9,
+      "symbol": "ViewController.mtkView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 13,
+      "symbol": "ViewController.device",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 14,
+      "symbol": "ViewController.commandQueue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 15,
+      "symbol": "ViewController.frameSemaphore",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 16,
+      "symbol": "ViewController.renderer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 17,
+      "symbol": "ViewController.scene",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 18,
+      "symbol": "ViewController.pointOfView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 19,
+      "symbol": "ViewController.cameraAngle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 21,
+      "symbol": "ViewController.lastPanLocation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 23,
+      "symbol": "ViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 46,
+      "symbol": "ViewController.vertexDescriptor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 60,
+      "symbol": "ViewController.makeScene_xyz_spheres(gridSideCountX:gridSideCountY:gridSideCountZ:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 109,
+      "symbol": "ViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 121,
+      "symbol": "ViewController.gestureRecognizer(_:shouldRecognizeSimultaneouslyWith:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 126,
+      "symbol": "ViewController.handleTapClick(recognizer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 164,
+      "symbol": "ViewController.handlePan(recognizer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 188,
+      "symbol": "ViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 189,
+      "symbol": "ViewController.draw(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Shared/ViewController.swift",
+      "line": 216,
+      "symbol": "ViewController.mtkView(_:drawableSizeWillChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 25,
+      "symbol": "NUColor",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 26,
+      "symbol": "NUGestureRecognizer",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 27,
+      "symbol": "NUGestureRecognizerDelegate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 28,
+      "symbol": "NUPanGestureRecognizer",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 29,
+      "symbol": "NUTapClickGestureRecognizer",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 30,
+      "symbol": "NULabel",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 31,
+      "symbol": "NUStackView",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 32,
+      "symbol": "NUView",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 33,
+      "symbol": "NUViewController",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 46,
+      "symbol": "NSGestureRecognizer.locationFromTop(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 54,
+      "symbol": "NSTextField.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 61,
+      "symbol": "NSTextField.textAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 71,
+      "symbol": "NUImage",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 73,
+      "symbol": "NSImage.init(cgImage:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking/Util/BiPlatformExtensions.swift",
+      "line": 77,
+      "symbol": "NSImage.cgImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/rudifarkas/GitHub/iOS/Metal/WM-metal-picking"
+}

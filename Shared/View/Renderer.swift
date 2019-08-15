@@ -20,18 +20,51 @@ let ConstantAlignment = 256 // Adjust this if the size of the instance constants
 
 class Renderer {
     let view: MTKView
-    let device: MTLDevice
+    let device: MTLDevice!
+    var commandQueue: MTLCommandQueue!
+
     let renderPipelineState: MTLRenderPipelineState
     let depthStencilState: MTLDepthStencilState
+    let frameSemaphore = DispatchSemaphore(value: MaxInFlightFrameCount)
 
     var constantBuffers = [MTLBuffer]()
     var frameIndex = 0
 
-    init?(view: MTKView, vertexDescriptor: MDLVertexDescriptor) throws {
-        guard let device = view.device else { throw RendererInitError(description: "View device cannot be nil") }
+    var vertexDescriptor: MDLVertexDescriptor!
+
+    var cameraAngle: Float = 0
+
+    static func makeVertexDescriptor() -> MDLVertexDescriptor {
+        let vertexDescriptor = MDLVertexDescriptor()
+        vertexDescriptor.vertexAttributes[0].name = MDLVertexAttributePosition
+        vertexDescriptor.vertexAttributes[0].format = .float3
+        vertexDescriptor.vertexAttributes[0].offset = 0
+        vertexDescriptor.vertexAttributes[0].bufferIndex = 0
+        vertexDescriptor.vertexAttributes[1].name = MDLVertexAttributeNormal
+        vertexDescriptor.vertexAttributes[1].format = .float3
+        vertexDescriptor.vertexAttributes[1].offset = MemoryLayout<Float>.size * 3
+        vertexDescriptor.vertexAttributes[1].bufferIndex = 0
+        vertexDescriptor.bufferLayouts[0].stride = MemoryLayout<Float>.size * 6
+        return vertexDescriptor
+    }
+
+    init(view: MTKView) {
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            fatalError("failed to create MTLDevice")
+        }
 
         self.device = device
         self.view = view
+
+        view.device = device
+        view.sampleCount = 4
+        view.colorPixelFormat = .bgra8Unorm_srgb
+        view.depthStencilPixelFormat = .depth32Float
+
+        commandQueue = device.makeCommandQueue()
+
+
+        vertexDescriptor = Renderer.makeVertexDescriptor()
 
         depthStencilState = Renderer.makeDepthStencilState(device: device)
 
@@ -39,11 +72,7 @@ class Renderer {
             constantBuffers.append(device.makeBuffer(length: ConstantBufferLength, options: [.storageModeShared])!)
         }
 
-        do {
-            renderPipelineState = try Renderer.makeRenderPipelineState(view: view, vertexDescriptor: vertexDescriptor)
-        } catch {
-            return nil
-        }
+        renderPipelineState = Renderer.makeRenderPipelineState(device: device, view: view, vertexDescriptor: vertexDescriptor)
     }
 
     class func makeDepthStencilState(device: MTLDevice) -> MTLDepthStencilState {
@@ -59,11 +88,8 @@ class Renderer {
     ///   - view: the MTKView
     ///   - vertexDescriptor:
     /// - Returns: MTLRenderPipelineState
-    /// - Throws: on failure to get the device or to create the DefaultLibrary
-    class func makeRenderPipelineState(view: MTKView, vertexDescriptor: MDLVertexDescriptor) throws -> MTLRenderPipelineState {
-        guard let device = view.device else { throw RendererInitError(description: "View device cannot be nil") }
-
-        guard let library = device.makeDefaultLibrary() else { throw RendererInitError(description: "Failed to create default Metal library") }
+    class func makeRenderPipelineState(device: MTLDevice, view: MTKView, vertexDescriptor: MDLVertexDescriptor) -> MTLRenderPipelineState {
+        guard let library = device.makeDefaultLibrary() else { fatalError("Failed to create default Metal library") }
 
         let vertexFunction = library.makeFunction(name: "vertex_main")
         let fragmentFunction = library.makeFunction(name: "fragment_main")
@@ -78,7 +104,11 @@ class Renderer {
         pipelineDescriptor.colorAttachments[0].pixelFormat = view.colorPixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = view.depthStencilPixelFormat
 
-        return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        do {
+            return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        } catch {
+            fatalError("Could not create render pipeline state object: \(error)")
+        }
     }
 
     func draw(_ scene: Scene, from pointOfView: Node?, in renderCommandEncoder: MTLRenderCommandEncoder) {

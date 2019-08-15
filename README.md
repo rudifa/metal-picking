@@ -1,8 +1,8 @@
 # MetalPicking
 
-This is the sample code for the article [_Picking and Hit-Testing in Metal_](http://metalbyexample.com/picking-hit-testing/) on _Metal by Example_.
+This is the sample code for the article [_Picking and Hit-Testing in Metal_](http://metalbyexample.com/picking-hit-testing/) on _Metal by Example_ by Warren Moore (Nov 2018).
 
-![Demonstration of picking in sample app](http://d2jaiao3zdxbzm.cloudfront.net/wp-content/uploads/picking.gif)
+![Demonstration of pby icking in sample app](http://d2jaiao3zdxbzm.cloudfront.net/wp-content/uploads/picking.gif)
 
 ## Modifications by [rudifa](https://github.com/rudifa)
 
